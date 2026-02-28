@@ -16,45 +16,45 @@ const TYPE_COLORS = {
 };
 const NODES = [
   { 
-    id: "n1", type: "stack", label: "Frontend & React", 
-    detail: "Expertise in Next.js, React.js, and Tailwind CSS. Focused on building responsive, high-performance 'Experience Engineering' interfaces.", 
+    id: "n1", type: "stack", label: "React & Next.js", 
+    detail: "Building modern web apps with React.js, Next.js, and Tailwind CSS. Focused on mobile-first responsive design and optimized user flows.", 
     color: TYPE_COLORS.stack, pos: [3.6, 1.3, -1.0], icon: "⚛️" 
   },
   { 
     id: "n2", type: "concept", label: "DSA Elite (NPTEL)", 
-    detail: "Elite Silver Certification from IIT Kharagpur (Top 5% nationally). Mastery in Data Structures, Algorithms, and OOP in Java/C++.", 
+    detail: "Elite Silver Certification from IIT Kharagpur. Ranked in the top 5% of candidates nationally for Data Structures and Algorithms.", 
     color: TYPE_COLORS.concept, pos: [-3.4, 0.9, -2.0], icon: "📊" 
   },
   { 
     id: "n3", type: "project", label: "Swift-Init-Wizard", 
-    detail: "Core Project: An automated CLI & UI utility to bootstrap full-stack environments instantly, handling dependency injection and boilerplate generation.", 
+    detail: "An automated CLI & UI utility to bootstrap full-stack projects instantly. Handles environment setup and boilerplate generation.", 
     color: TYPE_COLORS.project, pos: [2.0, -2.6, -4.5], icon: "🧙‍♂️", 
     link: "https://github.com/NJ-012/Swift-Init-Wizard" 
   },
   { 
-    id: "n4", type: "concept", label: "Agentic AI & RAG", 
-    detail: "Deep dive into LLM Tool-Use, Retrieval-Augmented Generation, and Agentic Workflows for context-aware autonomous systems.", 
-    color: TYPE_COLORS.concept, pos: [-2.6, 2.4, -5.0], icon: "🧠" 
+    id: "n4", type: "stack", label: "Java & C++", 
+    detail: "Core languages for competitive programming and Object-Oriented Programming (OOP). Strong foundation in algorithmic logic.", 
+    color: TYPE_COLORS.stack, pos: [-2.6, 2.4, -5.0], icon: "☕" 
   },
   { 
-    id: "n5", type: "stack", label: "Linux & Security", 
-    detail: "Proficient in Linux-based environments including Kali, Parrot OS, and Arch. Skilled in Git/GitHub version control and shell scripting.", 
-    color: TYPE_COLORS.stack, pos: [4.5, -0.9, -6.0], icon: "🐧" 
+    id: "n5", type: "stack", label: "Python & R", 
+    detail: "Used for Data Science and Machine Learning. Experienced in using Pandas for data manipulation and R for statistical analysis.", 
+    color: TYPE_COLORS.stack, pos: [4.5, -0.9, -6.0], icon: "🐍" 
   },
   { 
-    id: "n6", type: "stack", label: "Languages & SQL", 
-    detail: "Polyglot programmer: Java, C++, Python, JavaScript, and R. Strong foundation in SQL and Database Management Systems (DBMS).", 
-    color: TYPE_COLORS.stack, pos: [-4.0, -1.6, -3.0], icon: "💻" 
+    id: "n6", type: "stack", label: "SQL & DBMS", 
+    detail: "Proficient in relational database management and schema design. Maintaining a high academic standard with an 8.17 CGPA.", 
+    color: TYPE_COLORS.stack, pos: [-4.0, -1.6, -3.0], icon: "🗄️" 
   },
   { 
-    id: "n7", type: "concept", label: "OS & Networking", 
-    detail: "Academic foundation in Operating Systems and RESTful API architecture. Maintaining an 8.17 CGPA at NMIMS Shirpur.", 
-    color: TYPE_COLORS.concept, pos: [0.6, 3.2, -7.0], icon: "🌐" 
+    id: "n7", type: "concept", label: "AI & RAG", 
+    detail: "Exploring Agentic AI workflows, Retrieval-Augmented Generation (RAG), and LLM Tool-use for intelligent applications.", 
+    color: TYPE_COLORS.concept, pos: [0.6, 3.2, -7.0], icon: "🧠" 
   },
   { 
-    id: "n8", type: "concept", label: "Ambiora Leadership", 
-    detail: "Convenor of Technical Team. Developed Code hunt website and organized events, fortering a vibrant tech community at NMIMS Shirpur.", 
-    color: TYPE_COLORS.concept, pos: [-1.0, -3.2, -8.0], icon: "🎪" 
+    id: "n8", type: "stack", label: "Git & Linux", 
+    detail: "Version control via GitHub and development in Linux environments (Kali, Arch). Expert in VS Code optimization.", 
+    color: TYPE_COLORS.stack, pos: [-1.0, -3.2, -8.0], icon: "🐧" 
   },
 ];
 const TOTAL_SECTIONS = NODES.length + 2;
@@ -75,9 +75,26 @@ const CAMS = [
 function useScrollSections() {
   const [sec, setSec]  = useState(0);
   const [sub, setSub]  = useState(0);
-  const accumRef   = useRef(0);
-  const lockRef    = useRef(false);
-  const secRef     = useRef(0);
+  const accumRef      = useRef(0);
+  const lockRef       = useRef(false);
+  const secRef       = useRef(0);
+  const cursorAccumRef = useRef(0);
+  const lastCursorXRef = useRef(null);
+
+  const navigate = useCallback((direction) => {
+    if (lockRef.current) return;
+    if (direction === 'next' && secRef.current < TOTAL_SECTIONS - 1) {
+      lockRef.current = true;
+      secRef.current++;
+      setSec(secRef.current);
+      setTimeout(() => { lockRef.current = false; }, 300);
+    } else if (direction === 'prev' && secRef.current > 0) {
+      lockRef.current = true;
+      secRef.current--;
+      setSec(secRef.current);
+      setTimeout(() => { lockRef.current = false; }, 300);
+    }
+  }, []);
 
   useEffect(() => {
     const onWheel = (e) => {
@@ -106,30 +123,58 @@ function useScrollSections() {
       if (lockRef.current) return;
       if (e.key === "ArrowDown" || e.key === "ArrowRight" || e.key === "j" || e.key === " ") {
         e.preventDefault();
-        if (secRef.current < TOTAL_SECTIONS - 1) {
-          lockRef.current = true;
-          secRef.current++;
-          setSec(secRef.current);
-          setTimeout(() => { lockRef.current = false; }, 300);
-        }
+        navigate('next');
       } else if (e.key === "ArrowUp" || e.key === "ArrowLeft" || e.key === "k") {
         e.preventDefault();
-        if (secRef.current > 0) {
-          lockRef.current = true;
-          secRef.current--;
-          setSec(secRef.current);
-          setTimeout(() => { lockRef.current = false; }, 300);
-        }
+        navigate('prev');
       }
+    };
+    
+    // Cursor-based navigation
+    const onMouseMove = (e) => {
+      if (lockRef.current) return;
+      
+      // Initialize on first move
+      if (lastCursorXRef.current === null) {
+        lastCursorXRef.current = e.clientX;
+        return;
+      }
+      
+      const deltaX = e.clientX - lastCursorXRef.current;
+      lastCursorXRef.current = e.clientX;
+      
+      // Accumulate horizontal movement
+      cursorAccumRef.current += deltaX * 0.008;
+      cursorAccumRef.current = Math.max(0, Math.min(1, cursorAccumRef.current));
+      
+      // Trigger navigation based on accumulated movement
+      if (cursorAccumRef.current >= 0.75 && secRef.current < TOTAL_SECTIONS - 1) {
+        navigate('next');
+        cursorAccumRef.current = 0;
+      } else if (cursorAccumRef.current <= 0.25 && secRef.current > 0) {
+        navigate('prev');
+        cursorAccumRef.current = 0.5;
+      }
+    };
+    
+    // Reset cursor position tracking when mouse stops
+    const onMouseLeave = () => {
+      lastCursorXRef.current = null;
+      cursorAccumRef.current = 0;
     };
     
     window.addEventListener("wheel", onWheel, { passive: false });
     window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseleave", onMouseLeave);
+    
     return () => {
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseleave", onMouseLeave);
     };
-  }, []);
+  }, [navigate]);
 
   const jump = useCallback((s) => {
     secRef.current = s; setSec(s); setSub(0); accumRef.current = 0;
@@ -703,14 +748,14 @@ export default function KnowledgeGraph() {
         ))}
       </div>
 
-      {sec===0 && (
+{sec===0 && (
         <div style={{
           position:"absolute",bottom:40,left:"50%",
           fontFamily:"'Space Mono',monospace",
           fontSize:9,letterSpacing:"0.3em",color:"#4a4566",
           animation:"floatUp 3.5s ease-in-out infinite, pulse 2s ease-in-out infinite",
           whiteSpace:"nowrap",
-        }}>⬇ SCROLL OR USE ↑↓ KEYS TO EXPLORE</div>
+        }}>⬇ SCROLL, USE ↑↓ KEYS, OR MOVE CURSOR TO EXPLORE</div>
       )}
 
       {[[{top:16,left:16},{borderTop:"1px solid rgba(96,165,250,0.2)",borderLeft:"1px solid rgba(96,165,250,0.2)"}],
