@@ -1,16 +1,47 @@
-# React + Vite
+# ⚛️ 3D Knowledge Graph Portfolio | Niyati Joshi
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An "Experience Engineering" showcase that transforms a traditional professional profile into a dynamic, interactive 3D environment. This project visualizes my technical expertise and academic achievements as a navigable network of interconnected nodes.
 
-Currently, two official plugins are available:
+**Live Demo:** [https://nj-012.github.io/interactive-portfolio/](https://nj-012.github.io/interactive-portfolio/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🛠️ The Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This website is a specialized frontend project designed to demonstrate high-performance 3D rendering in the browser.
 
-## Expanding the ESLint configuration
+### **Core Frameworks**
+* **React.js & Vite:** For a fast, component-based UI architecture.
+* **Tailwind CSS:** Used for the responsive glassmorphism overlays and UI typography.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### **3D Engine & Graphics**
+* **Three.js:** The primary WebGL engine for 3D rendering.
+* **React Three Fiber (R3F):** A React reconciler for Three.js that bridges declarative UI with 3D objects.
+* **React Three Drei:** For advanced 3D abstractions and smooth camera controls.
+* **Postprocessing:** Implementation of cinematic Bloom and Glow effects to highlight technical nodes.
+
+---
+
+## 💡 Key Interactive Features
+
+* **Programmatic Camera Flight:** The camera intelligently "flies" to specific coordinates as users interact with the knowledge tracker, providing a cinematic narrative flow.
+* **Interactive Node System:** Custom-built orbital system where each node represents a verified skill or project (e.g., **Swift-Init-Wizard**, **NPTEL Elite DSA status**).
+* **Experience Engineering Philosophy:** Designed to bridge the gap between complex technical data and intuitive visual storytelling.
+* **Responsive 3D Canvas:** Adaptive field-of-view (FOV) logic that ensures the 3D scene remains immersive across mobile, tablet, and desktop screens.
+
+---
+
+## 🚀 Projects & Achievements Highlighted
+Inside the 3D environment, you can explore:
+- **Swift-Init-Wizard:** My core automation utility for full-stack project bootstrapping.
+- **NPTEL Elite (Top 5%):** National-level certification in Data Structures & Algorithms from IIT Kharagpur.
+- **Tech Stack Proficiency:** Expertise in Java, C++, Python, JavaScript, and specialized Linux environments (Arch, Kali).
+- **Advanced Concepts:** My current work in Agentic AI Workflows and RAG (Retrieval-Augmented Generation).
+
+---
+
+## 💻 Local Development
+
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/NJ-012/interactive-portfolio.git](https://github.com/NJ-012/interactive-portfolio.git)
